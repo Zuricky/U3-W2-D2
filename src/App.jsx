@@ -1,26 +1,38 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
-import './App.css'
-import MyNav from './components/MyNav'
-import MyFooter from './components/MyFooter'
-import Welcome from './components/Welcome'
-// import AllTheBooks from './components/AllTheBooks'
-import { Container } from 'react-bootstrap'
-import BookList from './components/BookList'
+import "./App.css";
+import BookList from "./components/BookList";
+import MyFooter from "./components/MyFooter";
+import MyNav from "./components/MyNav";
+import Welcome from "./components/Welcome";
 
-import fantasy from './data/fantasy.json'
+import fantasy from "./data/fantasy.json";
+import { Button, Col, Container, Row } from "react-bootstrap";
+import { useState } from "react";
 
-function App() {
+const App = () => {
+  const [books, setBooks] = useState(fantasy);
+
   return (
     <>
       <MyNav />
-      <Container>
-        <Welcome />
-        {/* <AllTheBooks /> */}
-        <BookList books={fantasy} />
+      <Welcome />
+
+      <div className="d-flex justify-content-center gap-1 my-3">
+        <Button variant="primary" onClick={() => setBooks(fantasy)}>
+          Fantasy
+        </Button>
+      </div>
+
+      <Container fluid>
+        <Row>
+          <Col>
+            <BookList books={books} />
+          </Col>
+        </Row>
       </Container>
+
       <MyFooter />
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
